@@ -1,0 +1,36 @@
+#include <bits/stdc++.h> 
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+bool isPermutation(char input1[], char input2[]) {
+    int l = sizeof(input1)/sizeof(input1[0]);
+    int l2 = sizeof(input2)/sizeof(input2[0]);
+    bool check = true;
+    if (l != l2){
+      check = false;
+    }
+    else{
+    int count = 0;
+    for(int i=0; i<l;i++){
+        for(int j = 0; j<l2;j++){
+         if(input1[i]==input2[j]){
+             count++;
+             break;
+         }
+
+        }
+    }
+    if(count != l) check =  false;
+
+    }
+    return check;
+}
+
+int main() {
+    int size = 1e6;
+    char str1[size];
+    char str2[size];
+    cin >> str1 >> str2;
+    cout << (isPermutation(str1, str2) ? "true" : "false");
+}
