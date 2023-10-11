@@ -1,0 +1,70 @@
+
+#include <bits/stdc++.h> 
+#include<iostream>
+
+#include<algorithm>
+
+using namespace std;
+
+class Fraction {
+
+    // Complete the class
+    int numer,denm;
+    public:
+    void set(int a, int b){
+        numer  = a;
+        denm = b;
+    }
+
+    void add(Fraction obj2){
+        int d = this->denm;
+        this->denm = this->denm * (obj2.denm);
+        this->numer = this->numer*(obj2.denm) + d*(obj2.numer);
+    }
+
+    void mul(Fraction obj2){
+        this->denm = this->denm * (obj2.denm);
+        this->numer = this->numer*(obj2.numer);
+    }    
+
+    void simp(){
+        int d  = __gcd(numer,denm);
+        this->denm = (this->denm)/d;
+        this->numer = this->numer/d;
+
+    }   
+    void print(){
+        cout << this->numer << "/" << this->denm << endl;
+    }
+
+};
+
+int main() {
+    int a,b;
+    cin >> a >> b;
+    Fraction obj;
+    obj.set(a,b);
+    int t;
+    cin >> t;
+    while(t--){
+        int choice,n2,d2;
+        cin >> choice >> n2 >> d2;
+        Fraction obj2;
+        obj2.set(n2,d2);
+        switch(choice){
+            case 1:
+                obj.add(obj2);
+                obj.simp();
+                obj.print();
+                break;
+            case 2:
+                obj.mul(obj2);
+                obj.simp();
+                obj.print(); 
+                break;
+            
+        }
+    }
+
+    return 0;
+}
