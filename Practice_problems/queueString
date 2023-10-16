@@ -1,0 +1,95 @@
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+class Node
+{
+public:
+    string value;
+    Node *next;
+    Node(string data)
+    {
+        value = data;
+        next = NULL;
+    }
+};
+
+class Queue
+{
+    Node *head;
+    Node *tail;
+    int size;
+
+public:
+    Queue()
+    {
+        head = NULL;
+        tail = NULL;
+        size = 0;
+    }
+
+    void enque(string val)
+    {
+        Node *n = new Node(val);
+        if (head == NULL)
+        {             // Queue is empty
+            head = n; // Both head and tail are given value of n
+            tail = n;
+            return;
+        }
+        tail->next = n;
+        tail = n;
+        size++; // increase size with each enque
+    }
+    void dequeue()
+    {
+        if (head == NULL)
+        {
+            return; // Queue is empty
+        }
+
+        Node *oldHead = head;
+        Node *newHead = head->next;
+        head = newHead;
+        if (head == NULL)
+            tail = nullptr;
+        free(oldHead);
+        size--;
+    }
+
+    int getSize()
+    {
+        return size;
+    }
+
+    bool isEmpty()
+    {
+            return (head == NULL);
+    }
+
+    string front(){
+        if(head == NULL) return "empty";
+        return head->value;
+    }
+
+};
+int main()
+{
+    Queue q;
+    int n;
+    string elem;
+    cin >> n;
+    cin.ignore();
+    while(n>0){
+        getline(cin,elem);
+        q.enque(elem);
+        n--;
+    }
+
+    while(not q.isEmpty()){
+        cout << q.front() << " ";
+        q.dequeue();
+    }
+    return 0;
+}
