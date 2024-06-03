@@ -16,8 +16,24 @@ void insBottom(stack<int> &st, int element){
         int curr = temp.top();
         temp.pop();
         st.push(curr);
+    }    
+void solve(stack<int> &s, int x){
+    if(s.empty()){
+        s.push(x);
+        return;
     }
+
+    int num = s.top();
+    s.pop();
+    solve(s,x);
+    s.push(num);
+}
     
+stack<int> pushAtBottom(stack<int>& myStack, int x) 
+{
+    solve(myStack,x);
+    return myStack;
+}
     
 }
 int main(){
