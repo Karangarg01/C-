@@ -1,35 +1,45 @@
-#include <iostream>
-#include <queue>
-#include <stack>
-using namespace std;
-
-int main(){
-    queue<int> input;
-    stack<int> temp;
-    input.push(10);
-    input.push(20);
-    input.push(30);
-    input.push(40);
-    input.push(50);
-
-    while (not input.empty())
+class Solution
+{
+    public:
+    void stackRev(stack<int> &st, queue<int> &q){
+        
+        while(!q.empty()){
+            st.push(q.front());
+            q.pop();
+        }
+        
+        
+    }
+    queue<int> rev(queue<int> q)
     {
-        temp.push(input.front());
-        input.pop();
+        stack<int> st;
+        stackRev(st,q);
+        
+        while(!st.empty()){
+            q.push(st.top());
+            st.pop();
+        }
+        
+        return q;
     }
 
-    while (not temp.empty())
-    {
-        input.push(temp.top());
-        temp.pop();
+// Recursive Method
+void func(queue<int> &q){
+        
+        if(q.empty()){
+            return;
+        }
+        
+        int a = q.front();
+        q.pop();
+        
+        func(q);
+        q.push(a);
     }
     
-
-    while (not input.empty())
+    queue<int> rev(queue<int> q)
     {
-        cout << input.front() << endl;
-        input.pop();
+        func(q);
+        return q;
     }
-    
-    return 0;
-}
+};
